@@ -4,12 +4,38 @@ Machine Learning Playground with Python
 
 https://youtu.be/_uQrJ0TkZlc?feature=shared&t=15057
 
+## Libraries and Tools for ML
+
+* [numpy](https://numpy.org/) - provides multi-dimensional arrays
+* [pandas](https://pandas.pydata.org/) - a data-analysis library that provides a concept called *data frame*
+* [matplotlib](https://matplotlib.org/) - a 2D plotting library for creating graphs and plots
+* [scikit-learn](https://scikit-learn.org/stable/) - provides common algorithms like decision trees, neural networks and so on
+* [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/index.html) - environment for interactive computing with computational notebooks
+
+## Prerequisites
+
+* git
+* Docker Desktop / OrbStack
+
 ## Setup
 
 ```sh
 git clone https://github.com/dskecse/ml-playground
 cd $_
+docker compose up
 ```
+
+This will:
+
+* clone the repo
+* `cd` into the repo dir
+* pull up the official [`scipy-notebook` Docker image](https://quay.io/repository/jupyter/scipy-notebook?tab=tags) - includes JupyterLab and a `scikit-learn` package
+* spin up the Jupyter Server
+* serve notebooks from the repo dir.
+
+To access the server (Jupyter Dashboard), open up:
+
+http://localhost:8888/lab?token=TOKEN
 
 ## ML in Action
 
