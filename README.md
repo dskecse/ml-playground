@@ -29,12 +29,40 @@ This will:
 
 * clone the repo
 * `cd` into the repo dir
-* pull up the official [`scipy-notebook` Docker image](https://quay.io/repository/jupyter/scipy-notebook?tab=tags) - includes JupyterLab and a `scikit-learn` package
+* pull up the official [`scipy-notebook` Docker image](https://quay.io/repository/jupyter/scipy-notebook?tab=tags) - includes JupyterLab and a `scikit-learn` package, [based off of the `minimal-notebook`](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#image-relationships)
 * map the repo's root dir to the container's work dir
 * spin up the Jupyter Server on port `8888`
 * serve notebooks from the repo dir.
 
 To access the server (Jupyter Dashboard), open up http://localhost:8888/lab?token=TOKEN.
+
+By default it points to the user's `HOME` dir. Switch to the `work` dir in the Jupyter Dashboard and create a Jupyter notebook:
+
+```
+Launcher -> Notebook -> Python 3 (ipykernel)
+```
+
+This will create a notebook file with an `.ipynb` extension.
+
+## Importing a Dataset
+
+How to load a dataset from the CSV file in Jupyter.
+
+Dataset: [Video Game Sales](https://www.kaggle.com/datasets/gregorut/videogamesales)
+
+```python
+import pandas as pd
+df = pd.read_csv("vgsales.csv")
+df # to inspect the resulting data frame
+```
+
+This returns a data frame object like an Excel spreadsheet.
+
+Below are some of the most useful methods and attributes:
+
+* `df.shape` - returns a tuple of the number of records and columns in the dataset
+* `df.describe()` - basic statistics of the data
+* `df.values` - a 2D array of a dataset representation
 
 ## ML in Action
 
