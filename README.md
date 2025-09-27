@@ -33,9 +33,7 @@ This will:
 * spin up the Jupyter Server
 * serve notebooks from the repo dir.
 
-To access the server (Jupyter Dashboard), open up:
-
-http://localhost:8888/lab?token=TOKEN
+To access the server (Jupyter Dashboard), open up http://localhost:8888/lab?token=TOKEN.
 
 ## ML in Action
 
