@@ -121,3 +121,19 @@ Depending on the accuracy of predictions, we could get back to the model and:
 * or fine-tune the parameters of a model
 
 Each algorithm has parameters that can be modified to optimize the accuracy.
+
+## ML Project: Online Music Player
+
+Users sign up, we ask their age and gender.
+Based on their profile, we recommend the music they're likely to listen to.
+
+GOAL: use ML to improve recommendations.
+
+We want to build a model:
+
+* we feed this model some sample data based on existing users
+* our model learns patterns in the data, so we can ask it to make predictions.
+
+When a new user signs up, we tell our model we have a new user with this profile, and ask what kind of music this user is interested in. Our model will say "jazz" or "hip-hop" or whatever, and based on that we could make suggestions to the user.
+
+Given: [Music](http://bit.ly/music-csv) dataset.
