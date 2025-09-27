@@ -64,6 +64,41 @@ Below are some of the most useful methods and attributes:
 * `df.describe()` - basic statistics of the data
 * `df.values` - a 2D array of a dataset representation
 
+## Jupyter Shortcuts
+
+Jupyter notebooks are structured around units called **cells**. They serve as the fundamental building blocks for organizing and executing code and text within a notebook.
+
+An activated cell can either be in:
+
+* *Edit mode* or
+* *Command mode*
+
+Depending on the mode, there are different shortcuts. When a cell is in the *Command mode* (press <kbd>Esc</kbd> to enable):
+
+* <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>H</kbd> - to list all the keyboard shortcuts
+* <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd> - to open the Command Palette
+
+Most used shortcuts:
+
+* <kbd>B</kbd> (below) - to Insert a Cell below the current cell (in Command mode)
+* <kbd>A</kbd> (above) - to Insert a Cell above the current cell (in Command mode)
+* <kbd>DD</kbd> - to Delete the Cell
+* <kbd>J</kbd> and <kbd>K</kbd> - to move down and up the cells (VIM-like navigation)
+* <kbd>Enter</kbd> - to Enter the *Edit mode* in the activated Cell
+* <kbd>Cmd</kbd>+<kbd>/</kbd> - to Comment out the line
+* <kbd>Cmd</kbd>+<kbd>Enter</kbd> - to Run only the selected Cell and do not advance
+
+NOTE: Jupyter saves the output of each cell, so we don't have to rerun the code if it hasn't changed!
+
+To run all cells: activate the Command Palette and search for `Run All Cells`.
+
+The `.ipynb` notebook files include the source code organized in cells as well as the output for each cell. That's why it's different from a regular `.py` file where we only have the source code.
+
+There's also autocompletion and IntelliSense in Jupyter notebooks:
+
+1. Type in `df.` and press <kbd>Tab</kbd> to see all the attributes and methods on this data frame object.
+2. With the cursor on the name of the method press <kbd>Shift</kbd>+<kbd>Tab</kbd> to see the tooltip on what this method does and what parameters it takes.
+
 ## ML in Action
 
 High-level steps to follow in a ML project:
