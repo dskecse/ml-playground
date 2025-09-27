@@ -36,7 +36,11 @@ This will:
 
 To access the server (Jupyter Dashboard), open up http://localhost:8888/lab?token=TOKEN.
 
-By default it points to the user's `HOME` dir. Switch to the `work` dir in the Jupyter Dashboard and create a Jupyter notebook:
+## Creating Jupyter Notebooks
+
+By default Jupyter Dashboard points to the user's `HOME` dir.
+
+Switch to the `work` dir there and create a Jupyter notebook:
 
 ```
 Launcher -> Notebook -> Python 3 (ipykernel)
@@ -48,7 +52,7 @@ This will create a notebook file with an `.ipynb` extension.
 
 How to load a dataset from the CSV file in Jupyter.
 
-Dataset: [Video Game Sales](https://www.kaggle.com/datasets/gregorut/videogamesales)
+Given the [Video Game Sales](https://www.kaggle.com/datasets/gregorut/videogamesales) dataset:
 
 ```python
 import pandas as pd
