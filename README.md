@@ -30,7 +30,8 @@ This will:
 * clone the repo
 * `cd` into the repo dir
 * pull up the official [`scipy-notebook` Docker image](https://quay.io/repository/jupyter/scipy-notebook?tab=tags) - includes JupyterLab and a `scikit-learn` package
-* spin up the Jupyter Server
+* map the repo's root dir to the container's work dir
+* spin up the Jupyter Server on port `8888`
 * serve notebooks from the repo dir.
 
 To access the server (Jupyter Dashboard), open up http://localhost:8888/lab?token=TOKEN.
