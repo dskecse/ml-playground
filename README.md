@@ -137,3 +137,57 @@ We want to build a model:
 When a new user signs up, we tell our model we have a new user with this profile, and ask what kind of music this user is interested in. Our model will say "jazz" or "hip-hop" or whatever, and based on that we could make suggestions to the user.
 
 Given: [Music](http://bit.ly/music-csv) dataset.
+
+### Learning and Predicting
+
+Building a model requires using an ML algorithm.
+
+There's many algorithms out there, and each algorithm has its pros and cons in terms of
+
+* performance
+* accuracy.
+
+We'll use a very simple algorithm called **decision tree**.
+
+The good news is we don't have to explicitly program these algorithms.
+They're already implemented for us in a library called `skicit-learn`!
+
+In the `sklearn` package there's a module called `tree` with a `DecisionTreeClassifier` class.
+This class implements the **decision tree** algorithm.
+
+We need to create a new instance of this class, and let's call this object a `model`.
+
+Now that we have a model, we need to train it, so it learns patterns in the data!
+
+Finally, we need to ask our model to **make predictions**, so we can ask it:
+what's the kind of music that a 24-year-old male likes?
+
+There's no sample for a 24-year-old male. We *expect* the model to say "HipHop".
+Similarly, we *expect* the model to say a 23-year-old female likes dance music.
+
+```python
+import os
+import pandas as pd
+from sklearn.tree import DecisionTreeClassifier
+
+music_data = pd.read_csv(os.path.join("..", "datasets", "music.csv")) # import the dataset
+X = music_data.drop(columns=["genre"]) # create an input set
+y = music_data["genre"] # create an output set
+
+model = DecisionTreeClassifier() # create a model
+model.fit(X, y) # train the model, takes 2 datasets: input & output set
+
+# make predictions for a 21-year-old male & a 22-year-old female
+predictions = model.predict(pd.DataFrame([ [21, 1], [22, 0] ], columns=["age", "gender"]))
+predictions
+```
+
+So our model can successfully make predictions now!
+
+But building a model that makes predictions accurately is not always that easy.
+
+After we build a model, we need to **measure** its **accuracy**.
+And if it's not accurate enough, we should either:
+
+* fine-tune it
+* or build a model using a different algorithm.
