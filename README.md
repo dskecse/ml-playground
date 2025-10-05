@@ -191,3 +191,80 @@ And if it's not accurate enough, we should either:
 
 * fine-tune it
 * or build a model using a different algorithm.
+
+### Calculating the Accuracy
+
+To measure the **accuracy** of the model, we need to split our dataset into 2 sets:
+
+* one for *training*
+* the other for *testing*.
+
+Above we're passing the entire dataset for training the model and using 2 samples for making predictions. That's not enough to calculate the accuracy.
+
+A general rule of thumb is to allocate:
+
+* 70-80% of our data for training
+* the other 20–30% for testing.
+
+Then, instead of passing only 2 samples for making predictions, we can pass the *testing* dataset,
+we'll get predictions and then compare them with the expected values in the output set for testing.
+Based on that we can calculate the **accuracy**.
+
+```python
+import os
+import pandas as pd
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+TEST_SET_RATIO = 0.2
+
+music_data = pd.read_csv(os.path.join("..", "datasets", "music.csv")) # import the dataset
+X = music_data.drop(columns=["genre"]) # create an input set
+y = music_data["genre"] # create an output set
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=TEST_SET_RATIO)
+
+model = DecisionTreeClassifier() # create a model
+model.fit(X_train, y_train) # train the model, takes 2 sets: input & output set for training
+predictions = model.predict(X_test) # make predictions
+
+score = accuracy_score(y_test, predictions) # compare expected values & predictions, score: 0..1
+score
+```
+
+With the `train_test_split` function we can easily split out dataset into 2 sets:
+
+* training
+* and testing.
+
+That way, we're allocating 20% our data for testing.
+This function returns a tuple (immutable list), so we unpack it into 4 variables:
+
+* input sets for training (`X_train`) and testing (`x_test`)
+* output sets for training (`y_train`) and testing (`y_test`).
+
+When training our model, instead of passing the entire dataset, we pass only the *training* set (`X_train`, `y_train`).
+
+When making predictions, instead of passing 2 samples, we pass the input set for testing (`X_test`).
+Now we get predictions.
+
+To calculate the **accuracy** we simply have to compare these predictions with the expected values we have in our output set for testing (`y_test`).
+
+The `accuracy_score` function returns an **accuracy score** between 0 and 1.
+
+In this case it's 1, or 100%. But if we run this one more time, we'll see a different result, e.g. `0.75`. Because every time we split our dataset into *training* and *testing sets*, we'll have different datasets, because the function randomly picks data for training and testing.
+
+If we change the `test_size` from `0.2` to `0.8`, essentially using only 20% of our data for training this model and using the other 80% for testing, and we run this cell multiple times, the **accuracy** immediately drops to `0.4`, or 40%, or even lower. That's really bad.
+
+The reason this is happening is because we're using very little data for training this model.
+This is one of the **key concepts** in ML!
+The more data we give to our model, and the cleaner the data is, the better result we get.
+So if we have duplicates, irrelevant data or incomplete values, our model will learn *bad patterns* in our data. That's why it's really important to *clean* our data *before* training our model!
+
+Even if we change the `test_size` back to `0.2`, the model's accuracy score could drop to `0.5`.
+The reason is that we don't have enough data.
+Some ML problems require 1000s or even millions of samples to train a model.
+The more complex a problem is, the more data we need.
+
+Here we're only dealing with a table of 3 columns.
+But if we want to build a model to tell if a picture is a cat or a dog or a horse or a lion, we'll need millions of pictures. The more animals we want to support, the more pictures we need.
