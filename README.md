@@ -384,8 +384,17 @@ Other parameters we want to set are:
 
 This produces a new `music-recommender.dot` file in a DOT format. It could be opened in an editor.
 
-To visualize this graph e.g. in VSCode, we need to install an extension: [dot by Stephanvs](https://marketplace.visualstudio.com/items?itemName=Stephanvs.dot).
-Install and `Open Preview to the Side`.
+To visualize this graph, look for the tools in the list:
+
+* https://www.graphviz.org/about/#viewers
+* https://www.graphviz.org/resources/#editor-plugins
+
+Online graphviz visual editors:
+
+* https://magjac.com/graphviz-visual-editor/
+* https://dreampuf.github.io/GraphvizOnline/
+
+![Decision Tree Graph Visualization](/music-recommender.png)
 
 This is exactly how our model makes predictions.
 We have this **binary tree**, which means every node can have a maximum of 2 children.
