@@ -333,3 +333,70 @@ model = joblib.load(model_file) # load the model
 predictions = model.predict(pd.DataFrame([[21, 1]], columns=X.columns))
 predictions
 ```
+
+### Visualizing a Decision Tree
+
+Earlier it was mentioned that decision trees are the easiest to understand.
+That's why we started ML with decision trees.
+
+We're going to *export* our model in a *visual* format,
+so we'll see how this model makes predictions!
+
+Once again, the code was simplified, so we just:
+
+1. Import our dataset
+2. Create input and output sets
+3. Create a model
+4. And train it.
+
+```python
+import os
+import pandas as pd
+from sklearn.tree import DecisionTreeClassifier
+from sklearn import tree
+
+music_data = pd.read_csv(os.path.join("..", "datasets", "music.csv"))
+X = music_data.drop(columns=["genre"])
+y = music_data["genre"]
+
+model = DecisionTreeClassifier()
+model.fit(X, y)
+
+out_file = os.path.join("..", "music-recommender.dot")
+tree.export_graphviz(model, out_file=out_file,
+                            feature_names=X.columns, # ["age", "gender"]
+                            class_names=sorted(y.unique()),
+                            label="all",
+                            rounded=True,
+                            filled=True)
+```
+
+The `tree` object has an `export_graphviz` method for exporting the decision tree in a graphical format. It's called after we've trained our model.
+
+The method takes a model and an output file. We want to selectively pass keyword arguments without worrying about their order.
+
+The [DOT format](https://graphviz.org/doc/info/lang.html) is a graph description language.
+
+Other parameters we want to set are:
+
+* `feature_names` – these are the **features** or the **columns** of our **dataset**, so they are the properties or features of our data, set to an array of 2 strings: age and gender
+* `class_names` - the list of **classes** or **labels** we have in our output dataset (`y`), which includes all the genres or all the classes of our data, set to the sorted list of unique values
+
+This produces a new `music-recommender.dot` file in a DOT format. It could be opened in an editor.
+
+To visualize this graph e.g. in VSCode, we need to install an extension: [dot by Stephanvs](https://marketplace.visualstudio.com/items?itemName=Stephanvs.dot).
+Install and `Open Preview to the Side`.
+
+This is exactly how our model makes predictions.
+We have this **binary tree**, which means every node can have a maximum of 2 children.
+On top of each node we have a condition.
+If it's `True` then we go to the child node on the left side.
+Otherwise, we go to the child on the right side.
+
+The meaning of all the parameters:
+
+* `feature_names` are set, so we can see the rules in our nodes
+* `class_names` are set to the unique list of genres for displaying the `class` for each node
+* `label="all"` means every node has labels that we can read
+* `rounded=True` means nodes have rounded corners
+* `filled=True` means that each box or each node is filled with a color
