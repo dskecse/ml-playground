@@ -10,6 +10,7 @@ https://youtu.be/_uQrJ0TkZlc?feature=shared&t=15057
 * [pandas](https://pandas.pydata.org/) - a data-analysis library that provides a concept called *data frame*
 * [matplotlib](https://matplotlib.org/) - a 2D plotting library for creating graphs and plots
 * [scikit-learn](https://scikit-learn.org/stable/) - provides common algorithms like decision trees, neural networks and so on
+* [joblib](https://joblib.readthedocs.io/en/stable/) - provides fast compressed persistence capabilities
 * [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/index.html) - environment for interactive computing with computational notebooks
 
 ## Prerequisites
@@ -268,3 +269,67 @@ The more complex a problem is, the more data we need.
 
 Here we're only dealing with a table of 3 columns.
 But if we want to build a model to tell if a picture is a cat or a dog or a horse or a lion, we'll need millions of pictures. The more animals we want to support, the more pictures we need.
+
+### Persisting Models
+
+Basically, we:
+
+1. Import our dataset
+2. Create a model
+3. Train it
+4. Ask the model to make predictions
+
+Steps 1-3 is NOT what we want to run every time we have a new user or every time we want to make recommendations to an existing user, because training a model can sometimes be really time- and resource-consuming.
+
+In this example we're dealing with a very small dataset that has only 20 records.
+But in real applications we might have a dataset with 1000s or millions of samples.
+Training a model for that might take seconds or minutes or even hours.
+So that's why a **model persistence** is important.
+
+Once in a while, we build and train our model and then we save it to a file.
+Next time we want to make predictions, we simply load the model from the file, and ask it to make predictions. That model is already trained. We don't need to retrain it.
+
+We'll use the `joblib` library for saving and loading models.
+
+> [!NOTE]
+> `joblib` was removed from `sklearn.externals` starting with `scikit-learn` version `0.21`.
+> The correct way now is to install `joblib` separately and import it directly.
+
+Use `joblib.dump(model, file)` and `joblib.load(file)` as before.
+
+After we train our model, we simply call `joblib.dump(model, file)`.
+
+```python
+import os
+import pandas as pd
+from sklearn.tree import DecisionTreeClassifier
+# from sklearn.externals import joblib # older way
+import joblib
+
+music_data = pd.read_csv(os.path.join("..", "datasets", "music.csv"))
+X = music_data.drop(columns=["genre"])
+y = music_data["genre"]
+
+model = DecisionTreeClassifier()
+model.fit(X, y)
+
+model_file = os.path.join("..", "models", "music-recommender.joblib")
+joblib.dump(model, model_file) # store the model
+```
+
+The file produced is simply a binary file.
+
+Comment out steps 1-3, *load* the model instead, and make predictions:
+
+```python
+import os
+import pandas as pd
+from sklearn.tree import DecisionTreeClassifier
+import joblib
+
+model_file = os.path.join("..", "models", "music-recommender.joblib")
+model = joblib.load(model_file) # load the model
+
+predictions = model.predict(pd.DataFrame([[21, 1]], columns=X.columns))
+predictions
+```
