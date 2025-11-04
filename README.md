@@ -88,10 +88,15 @@ Most used shortcuts:
 * <kbd>B</kbd> (below) - to Insert a Cell below the current cell (in Command mode)
 * <kbd>A</kbd> (above) - to Insert a Cell above the current cell (in Command mode)
 * <kbd>DD</kbd> - to Delete the Cell
+* <kbd>M</kbd> (in Command mode) - to Convert to Markdown
+* <kbd>Y</kbd> (in Command mode) - to Convert to code
 * <kbd>J</kbd> and <kbd>K</kbd> - to move down and up the cells (VIM-like navigation)
 * <kbd>Enter</kbd> - to Enter the *Edit mode* in the activated Cell
 * <kbd>Cmd</kbd>+<kbd>/</kbd> - to Comment out the line
-* <kbd>Cmd</kbd>+<kbd>Enter</kbd> - to Run only the selected Cell and do not advance
+* <kbd>Z</kbd> (in Command mode) - to Undo an action outside the Cell (e.g. to Undo the deletion of a Cell)
+* <kbd>Cmd</kbd>+<kbd>Z</kbd> (in Edit mode) - to Undo an action inside the Cell
+* <kbd>Shift</kbd>+<kbd>Enter</kbd> - to Run the current Cell and Move to the next one
+* <kbd>Cmd</kbd>+<kbd>Enter</kbd> - to Stay on the same Cell after running
 
 NOTE: Jupyter saves the output of each cell, so we don't have to rerun the code if it hasn't changed!
 
