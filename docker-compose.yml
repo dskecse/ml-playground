@@ -5,7 +5,7 @@ services:
     volumes:
       - ./:/home/jovyan/work # maps the repo's root dir to the container's work dir
     ports:
-      - 8888:8888
+      - "${DOCKER_COMPOSE_JUPYTER_PORT:-8888}:8888"
     environment: {}
       # NB_USER: username    # Optional: Set a specific user within the container
       # JUPYTER_TOKEN: token # Optional: Set a token for access, otherwise it's generated
